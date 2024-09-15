@@ -28,6 +28,6 @@ final class Router
 
     public function router() {
 //        var_dump($this->page);
-        echo $this->page->getContent();
+        echo $this->page->getHtml();
     }
 }

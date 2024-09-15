@@ -8,9 +8,11 @@ use Components\Router;
 
 Autoloader::register();
 
+include 'Public/header.html';
 $router = new Router();
 $router->router();
 
+include 'Public/footer.html';
 
 // Маршрутизировать uri (Home, Upload)
 // Вывести страницу

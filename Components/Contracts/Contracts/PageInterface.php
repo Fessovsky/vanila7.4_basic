@@ -4,5 +4,6 @@ namespace Components\Contracts\Contracts;
 
 interface PageInterface
 {
-    public function getContent();
+    function getHtml();
+    function getContent();
 }
