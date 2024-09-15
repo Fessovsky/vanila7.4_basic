@@ -4,11 +4,16 @@ require 'Components/Router.php';
 require 'Components/Autoloader.php';
 
 use Components\Autoloader;
+use Components\DB;
 use Components\Router;
 
 Autoloader::register();
 
+$PDO = DB::getInstance();
+$connection = $PDO->getConnection();
+
 include 'Public/header.html';
+
 $router = new Router();
 $router->router();
 

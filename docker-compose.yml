@@ -12,8 +12,8 @@ services:
             - './docker/php/conf.d/:/usr/local/etc/php/conf.d/'
         networks:
             - testnet
-        environment:
-            - APP_ENV=${APP_ENV}
+        env_file:
+            -   .env
         extra_hosts:
             - "host.docker.internal:host-gateway"
 
