@@ -1,0 +1,53 @@
+services:
+    # PHP-FPM контейнер
+    php:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: wahelp_app_basic
+        ports:
+            - "9001:9000"
+        volumes:
+            - './:/var/www/html'
+            - './docker/php/conf.d/:/usr/local/etc/php/conf.d/'
+        networks:
+            - testnet
+        environment:
+            - APP_ENV=${APP_ENV}
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+
+    # MySQL контейнер
+    db:
+        image: mariadb:latest
+        container_name: wahelp_mariadb_basic
+        environment:
+            - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+            - MYSQL_USER=${DB_USERNAME}
+            - MYSQL_PASSWORD=${DB_PASSWORD}
+            - MYSQL_DATABASE=${DB_NAME}
+        volumes:
+            - './docker/volume/mysql:/var/lib/mysql'
+        networks:
+            - testnet
+        ports:
+            - "3306:3306"
+
+    # Nginx контейнер
+    nginx:
+        image: nginx:latest
+        container_name: wahelp_nginx_basic
+        volumes:
+            - './docker/nginx/conf.d/:/etc/nginx/conf.d/'
+            - './:/var/www/html'
+        ports:
+            - "80:80"
+        depends_on:
+            - php
+        networks:
+            - testnet
+
+# Описание сетей
+networks:
+    testnet:
+        driver: bridge
