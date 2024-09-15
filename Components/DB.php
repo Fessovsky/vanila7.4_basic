@@ -5,7 +5,7 @@ namespace Components;
 use PDO;
 use PDOException;
 
-class DB
+final class DB
 {
     private static $instance = null;
     private $connection;

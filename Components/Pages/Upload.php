@@ -2,7 +2,7 @@
 
 namespace Components\Pages;
 
-use Components\Contracts\Contracts\PageInterface;
+use Components\Contracts\PageInterface;
 
 final class Upload implements PageInterface
 {

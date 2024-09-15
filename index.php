@@ -4,23 +4,25 @@ require 'Components/Router.php';
 require 'Components/Autoloader.php';
 
 use Components\Autoloader;
-use Components\DB;
 use Components\Router;
 
 Autoloader::register();
 
-$PDO = DB::getInstance();
-$connection = $PDO->getConnection();
-
 include 'Public/header.html';
 
-$router = new Router();
-$router->router();
+$routes = require 'routes.php';
+$router = new Router($routes);
+$uri = $_SERVER['REQUEST_URI'];
+$httpMethod = $_SERVER['REQUEST_METHOD'];
+
+try {
+    $router->dispatch($uri,$httpMethod);
+} catch (\Error|\Exception $e) {
+    // TODO implement error handling
+    echo '<br>' . $e->getMessage();
+    echo '<br><a href="/">Home</a>';
+    die();
+}
+
 
 include 'Public/footer.html';
-
-// Маршрутизировать uri (Home, Upload)
-// Вывести страницу
-// URI: /upload загрузку файла, наззвание файла проеверить на валидность .csv не лолжен содержать опасных конструкций
-// При загрузке файл должен быть yield-нут в таблицу. при этом нужно передавать байндингами
-// При загрузке файла нужно проверить на валидность, если файл не валиден, то вывести ошибку

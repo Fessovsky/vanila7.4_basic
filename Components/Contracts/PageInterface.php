@@ -1,6 +1,6 @@
 <?php
 
-namespace Components\Contracts\Contracts;
+namespace Components\Contracts;
 
 interface PageInterface
 {

@@ -2,32 +2,49 @@
 
 namespace Components;
 
-use Components\Pages\Home;
-use Components\Pages\Upload;
+use Components\Contracts\ControllerInterface;
 
 final class Router
 {
-    private $url;
-    private $page;
-    public function __construct()
+    private array $routes;
+
+    public function __construct(array $routes)
     {
-        $this->url = filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_URL);
-        if (preg_match('/^\/[a-zA-Z0-9\/\-]*$/', $this->url)) {
-            switch ($this->url) {
-                case '/upload':
-                    $this->page = new Upload();
-                    break;
-                default:
-                    $this->page = new Home();
-            }
-        } else {
-            header('HTTP/2.0 400 Bad Request');
-            exit('Некорректный запрос.');
-        }
+        $this->routes = $routes;
     }
 
-    public function router() {
-//        var_dump($this->page);
-        echo $this->page->getHtml();
+    public function dispatch(string $uri, $httpMethod): void
+    {
+        $uri = parse_url($uri, PHP_URL_PATH);
+        $uri = rtrim($uri, '/'); // Удаляем завершающий слеш для консистентности
+        if ($uri === '') {
+            $uri = '/';
+        }
+        if (isset($this->routes[$httpMethod][$uri])) {
+            $route = $this->routes[$httpMethod][$uri];
+            $controllerName = $route['controller'];
+            $action = $route['action'];
+
+            if (class_exists($controllerName)) {
+
+                $controller = $this->createController($controllerName);
+                if (method_exists($controller, $action)) {
+                    $controller->$action();
+                    return;
+                }
+            }
+        }
+
+        throw new \Exception('Страница не найдена', 404);
+    }
+    private function createController(string $controllerName): ControllerInterface
+    {
+        switch ($controllerName) {
+            case 'Components\Controllers\HomeController':
+            case 'Components\Controllers\UploadController':
+                return new $controllerName();
+            default:
+                throw new \Exception('Неизвестный контроллер: ' . $controllerName);
+        }
     }
 }
