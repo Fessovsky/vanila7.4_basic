@@ -13,9 +13,9 @@ final class UsersRepository
     {
         try {
             $this->pdo->beginTransaction();
-            $stmt = $this->pdo->prepare("INSERT INTO users (id, name) VALUES (:id, :name)");
+            $stmt = $this->pdo->prepare("INSERT INTO users (number, name) VALUES (:number, :name)");
             foreach ($data as $user) {
-                $stmt->execute([':id' => $user[0], ':name' => $user[1]]);
+                $stmt->execute([':number' => $user[0], ':name' => $user[1]]);
             }
             $this->pdo->commit();
         } catch (\Exception $e) {

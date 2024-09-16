@@ -22,6 +22,18 @@ final class FilesRepository implements FileRegistererInterface
             $this->dbPDO->rollBack();
             throw new \Exception('Error registering file in database');
         }
+    }
 
+    public function unregister($filePath)
+    {
+        try {
+            $this->dbPDO->beginTransaction();
+            $stmt = $this->dbPDO->prepare("DELETE FROM files WHERE path = :path");
+            $stmt->execute(['path' => $filePath]);
+            $this->dbPDO->commit();
+        } catch (\Exception $e) {
+            $this->dbPDO->rollBack();
+            throw new \Exception('Error unregistering file in database');
+        }
     }
 }

@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS fake_microservice (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    type VARCHAR(255) NOT NULL,
+    payload TEXT NOT NULL
+);

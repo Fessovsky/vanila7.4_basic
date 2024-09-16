@@ -8,7 +8,7 @@ use Components\Contracts\RenderInterface;
 use Components\Pages\Home;
 use Components\Utils\RenderHTML;
 
-class HomeController implements ControllerInterface
+final class HomeController implements ControllerInterface
 {
 
     private RenderInterface $renderer;

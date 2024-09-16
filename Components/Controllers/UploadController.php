@@ -44,7 +44,7 @@ class UploadController implements ControllerInterface
         $generator = $this->parser->getIterator();
         $this->usersRepository->saveBatch($generator);
         unlink($this->uploader->getUploadPath());
-        header('Location: /');
+        $this->fileRegisterer->unregister($this->uploader->getUploadPath());
     }
 
     public function index(): void
