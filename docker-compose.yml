@@ -17,7 +17,7 @@ services:
         extra_hosts:
             - "host.docker.internal:host-gateway"
 
-    # MySQL контейнер
+    # MariaDB контейнер
     db:
         image: mariadb:latest
         container_name: wahelp_mariadb_basic
@@ -28,6 +28,7 @@ services:
             - MYSQL_DATABASE=${DB_NAME}
         volumes:
             - './docker/volume/mysql:/var/lib/mysql'
+            - './Initial_sql_statements:/Initial_sql_statements/'
         networks:
             - testnet
         ports:
