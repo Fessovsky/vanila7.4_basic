@@ -109,6 +109,12 @@
         justify-content: center;
     }
 
+    input {
+        padding: 8px;
+        margin: 5px 0;
+        width: 100%;
+    }
+
 </style>
 <header>
     <div class="container nav-bar">
