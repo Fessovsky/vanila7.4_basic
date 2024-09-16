@@ -28,8 +28,11 @@ class UploadController implements ControllerInterface
         $this->renderer = new RenderHTML();
         $this->page = new Upload();
         $this->db = DB::getInstance()->getConnection();
-        $uploadDir = getenv('UPLOAD_DIR') ?: './Uploads';
 
+        $uploadDir = getenv('UPLOAD_DIR');
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
         $this->uploader = new CsvFileUploader($uploadDir);
         $this->parser = new CsvParser();
         $this->fileRegisterer = new FilesRepository($this->db);
