@@ -20,7 +20,7 @@ ___
 ## SETUP
 ### 1. Clone the project
 ```bash
-git clone git@github.com:Fessovsky/wahelp_basic.git
+git clone git@github.com:Fessovsky/vanila7.4_basic.git
 ```
 
 ### 2. Copy env.example to .env and fill it with your data
@@ -43,7 +43,7 @@ docker compose up -d
 ```
 ### 4. Manually run SQLs in db (folder ./Initial_sql_statements) or execute this bash script in the container: 
 ```bash
-docker exec -i <sqlserver_container_name> /bin/bash /Initial_sql_statements/run-sql.sh
+docker exec -i <sqlserver_container_name> /bin/bash -c "if [ -f /Initial_sql_statements/' run-sql.sh' ]; then /bin/bash /Initial_sql_statements/' run-sql.sh'; elif [ -f /Initial_sql_statements/run-sql.sh ]; then /bin/bash /Initial_sql_statements/run-sql.sh; else echo 'No valid SQL script found'; fi"
 ```
 
 ## User flow
