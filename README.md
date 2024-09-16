@@ -1,5 +1,5 @@
 ## Project on php 7.4 
-Project on vanilla php with docker composer without any frameworks or extra dependencies except pdo
+Project on vanilla php7.4, docker composer and without any frameworks or extra dependencies except pdo
 ___
 ### Requirements
 - Docker
@@ -10,14 +10,14 @@ ___
 git clone git@github.com:Fessovsky/wahelp_basic.git
 ```
 
-### 2. Copy env.example to .env
+### 2. Copy env.example to .env and fill it with your data
 ```text
 APP_ENV=<development | production>
 DB_ROOT_PASSWORD=<root_pass>
 DB_USERNAME=<user_name>
 DB_PASSWORD=<password>
 DB_NAME=<*>
-DB_HOST=wahelp_mariadb_<docker-sql-container-name>
+DB_HOST=<docker-sql-container-name>
 UPLOAD_DIR=/var/www/html/<PREFERRED_FOLDER>
 ```
 ```bash
