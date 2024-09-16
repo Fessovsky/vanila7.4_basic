@@ -4,7 +4,7 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        container_name: wahelp_app_basic
+        container_name: app_basic
         ports:
             - "9001:9000"
         volumes:
@@ -20,7 +20,7 @@ services:
     # MariaDB контейнер
     db:
         image: mariadb:latest
-        container_name: wahelp_mariadb_basic
+        container_name: mariadb_basic
         environment:
             - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
             - MYSQL_USER=${DB_USERNAME}
@@ -37,7 +37,7 @@ services:
     # Nginx контейнер
     nginx:
         image: nginx:latest
-        container_name: wahelp_nginx_basic
+        container_name: nginx_basic
         volumes:
             - './docker/nginx/conf.d/:/etc/nginx/conf.d/'
             - './:/var/www/html'
