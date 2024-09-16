@@ -42,6 +42,7 @@ final class Router
         switch ($controllerName) {
             case 'Components\Controllers\HomeController':
             case 'Components\Controllers\UploadController':
+            case 'Components\Controllers\NotifyController':
                 return new $controllerName();
             default:
                 throw new \Exception('Неизвестный контроллер: ' . $controllerName);

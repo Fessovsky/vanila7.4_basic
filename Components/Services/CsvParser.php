@@ -48,17 +48,6 @@ final class CsvParser implements IteratorAggregate
         }
     }
 
-    public function getArray(): array
-    {
-        $handle = fopen($this->filePath, 'r');
-        if (!$handle) {
-            throw new RuntimeException('Cannot open file');
-        }
-        return array_map(function($row) {
-            return $this->sanitizeRow($row);
-        }, array_filter(array_map('str_getcsv', file($this->filePath))));
-    }
-
     private function sanitizeRow(array $row): array
     {
         if (empty($row[count($row) - 1])) {

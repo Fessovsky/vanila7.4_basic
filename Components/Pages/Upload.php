@@ -4,27 +4,15 @@ namespace Components\Pages;
 
 use Components\Contracts\PageInterface;
 
-final class Upload implements PageInterface
+final class Upload extends AbstractPage implements PageInterface
 {
-    public function getHtml(): string
-    {
-        return <<<HTML
-        <main>
-            <div class="container">
-                {$this->getContent()}
-            </div>
-        </main>
-        HTML;
-    }
-
     public function getContent(): string
     {
         return <<<CONTENT
         <header>
             <h1>Upload valid CSV with users</h1>
         </header>
-        <h4>Instructions</h4>
-        <p>Upload a CSV file with the following fields:</p>
+        <h4>Upload a CSV file with the following fields:</h4>
         <table style='border:1px solid #ccc;font-size: 0.9em; margin:1em 0'>
             <tr>
                 <th>Field name</th>

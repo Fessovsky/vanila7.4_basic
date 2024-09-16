@@ -95,14 +95,32 @@
         flex-direction: column;
         max-width: 360px;
     }
+    .nav-bar {
+        display: flex;
+        justify-content: left;
+        padding: 0;
+    }
+    .nav-bar ul {
+        align-content: center;
+        margin-left: 25px;
+    }
+    main {
+        display: flex;
+        justify-content: center;
+    }
+
 </style>
 <header>
-    <div class="container">
-        <h1>PHP Only App</h1>
+    <div class="container nav-bar">
+        <h3>PHP Only App</h3>
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/upload">Upload users</a></li>
-            <li><a href="/notify-users">Notify users</a></li>
+            <?php
+            $routes = require 'routes.php';
+            foreach ($routes['GET'] as $link => $class) {
+                $name = basename(str_replace('\\', '/', $class['controller']), 'Controller');
+                echo "<li><a href=\"{$link}\">{$name}</a></li>";
+            }
+            ?>
         </ul>
     </div>
 </header>
